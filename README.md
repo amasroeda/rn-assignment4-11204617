@@ -33,9 +33,9 @@ The Homepage component is displayed after the user logs in.
 - `FlatList`: A performant interface for rendering the list of featured jobs horizontally.
 
 **SCREENSHOTS**
-![Screenshot 1](./assets/Screenshot1.jpeg)
-![Screenshot 2](./assets/Screenshot2.jpeg)
-![Screenshot 3](./assets/Screenshot3.jpeg)
-![Screenshot 4](./assets/Screenshot4.jpeg)
-![Screenshot 5](./assets/Screenshot5.jpeg)
-![Screenshot 6](./assets/Screenshot6.jpeg)
+![Screenshot 1](../rn-assignment4-11204617/my-app/assets/Screenshot1.jpeg)
+![Screenshot 2](../rn-assignment4-11204617/my-app/assets/Screenshot2.jpeg)
+![Screenshot 3](../rn-assignment4-11204617/my-app/assets/Screenshot3.jpeg)
+![Screenshot 4](../rn-assignment4-11204617/my-app/assets/Screenshot4.jpeg)
+![Screenshot 5](../rn-assignment4-11204617/my-app/assets/Screenshot5.jpeg)
+![Screenshot 6](../rn-assignment4-11204617/my-app/assets/Screenshot6.jpeg)
