@@ -58,19 +58,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    fontWeight: 'bold',
     color: '#356899',
     marginTop: 70,
+    fontFamily: 'PoppinsBold'
   },
   welcome: {
     fontSize: 30,
-    fontWeight: 'bold',
-    marginTop: 12,
+    fontFamily: 'PoppinsBold',
+    marginTop: 9,
   },
   subtitle: {
     fontSize: 14,
+    fontFamily: 'PoppinsRegular',
     color: '#aaa',
-    marginTop: 10,
+    marginTop: 2,
     marginBottom: 45,
   },
   input: {
@@ -92,8 +93,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'PoppinsBold',
   },
   socialContainer: {
     flexDirection: 'row',

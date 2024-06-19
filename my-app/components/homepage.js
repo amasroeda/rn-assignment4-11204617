@@ -27,7 +27,7 @@ const popularJobs = [
     company: 'Burger King',
     salary: '$96,000/y',
     location: 'Los Angeles, US',
-    image: '../assets/burger king.png',
+    image: require('../assets/burger king.png'),
   },
   {
     id: '2',
@@ -35,7 +35,7 @@ const popularJobs = [
     company: 'Beats',
     salary: '$84,000/y',
     location: 'Florida, US',
-    image: '../assets/beats.png',
+    image: require('../assets/beats.png'),
   },
   {
     id: '3',
@@ -43,7 +43,7 @@ const popularJobs = [
     company: 'Facebook',
     salary: '$86,000/y',
     location: 'Florida, US',
-    image: 'https://via.placeholder.com/40',
+    image: require('../assets/facebook.png'),
   },
 ];
 
@@ -52,8 +52,8 @@ export default function Homepage() {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <ScrollView contentContainerStyle={styles.scrollView}>
-      <View style={styles.padding}>
-        <View style={styles.header}>
+        <View style={styles.padding}>
+          <View style={styles.header}>
             <View style={styles.userInfo}>
               <Text style={styles.userName}>Eric Atsu</Text>
               <Text style={styles.userEmail}>eric@gmail.com</Text>
@@ -62,14 +62,14 @@ export default function Homepage() {
           </View>
 
           <View style={styles.searchContainer}>
-              <View style={styles.searchBar}>
+            <View style={styles.searchBar}>
               <Image source={require('../assets/search.png')} style={styles.searchPic} />
               <TextInput
-                  style={styles.searchInput}
-                  placeholder="Search a job or position"
+                style={styles.searchInput}
+                placeholder="Search a job or position"
               />
-              </View>
-              <Image source={require('../assets/set.png')} style={styles.setPic} />
+            </View>
+            <Image source={require('../assets/set.png')} style={styles.setPic} />
           </View>
 
           <View style={styles.sectionHeader}>
@@ -78,20 +78,20 @@ export default function Homepage() {
               <Text style={styles.seeAll}>See all</Text>
             </TouchableOpacity>
           </View>
-      </View>
-        
+        </View>
 
         <FlatList
           data={featuredJobs}
           horizontal
           renderItem={({ item }) => (
-
             <View style={styles.featuredJob}>
               <View style={styles.jobIconContainer}>
-                <Image source={{ uri: item.image }} style={styles.jobIcon} />
+                <View style={{height: 60, backgroundColor:'white', borderRadius:20}}>
+                <Image source={item.image} style={styles.jobIcon} />
+                </View>
                 <View style={styles.jobInner}>
-                    <Text style={styles.jobTitle}>{item.title}</Text>
-                    <Text style={styles.jobCompany}>{item.company}</Text>
+                  <Text style={styles.jobTitle}>{item.title}</Text>
+                  <Text style={styles.jobCompany}>{item.company}</Text>
                 </View>
               </View>
 
@@ -107,32 +107,31 @@ export default function Homepage() {
         />
 
         <View style={styles.padding}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Popular Jobs</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAll}>See all</Text>
-          </TouchableOpacity>
-        </View>
-
-        {popularJobs.map((job) => (
-          <View key={job.id} style={styles.popularJob}>
-            <Image source={{ uri: job.image }} style={styles.jobIcon} />
-            <View style={styles.jobInfo}>
-
-              <View style={styles.PopInfoRow}>
-              <Text style={styles.PopTitle}>{job.title}</Text>
-              <Text style={styles.PopCompany}>{job.company}</Text>
-              </View>
-
-              <View style={styles.PopInfoRow}>
-              <Text style={styles.PopSalary}>{job.salary}</Text>
-              <Text style={styles.Poplocation}>{job.location}</Text>
-              </View>
-
-            </View>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Popular Jobs</Text>
+            <TouchableOpacity>
+              <Text style={styles.seeAll}>See all</Text>
+            </TouchableOpacity>
           </View>
 
-        ))}
+          {popularJobs.map((job) => (
+            <View key={job.id} style={styles.popularJob}>
+              <View style={{display: 'flex', flexDirection:'row', gap:10}}>
+              <Image source={job.image} style={{height: 52, width: 51}} ></Image>
+              <View style={styles.jobInfor}>
+                <View style={styles.PopInfoRow}>
+                  <Text style={styles.PopTitle}>{job.title}</Text>
+                  <Text style={styles.PopCompany}>{job.company}</Text>
+                </View>
+
+                <View style={styles.PopInfoRow}>
+                  <Text style={styles.PopSalary}>{job.salary}</Text>
+                  <Text style={styles.Poplocation}>{job.location}</Text>
+                </View>
+              </View>
+              </View>
+            </View>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -141,159 +140,177 @@ export default function Homepage() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#f8f9fa',
+  flex: 1,
+  backgroundColor: '#f8f9fa',
   },
   scrollView: {
-    padding: 20,
+  padding: 20,
   },
   padding: {
   paddingHorizontal: 12,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-    marginTop: 30,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: 20,
+  marginTop: 30,
   },
   profilePic: {
-    width: 50,
-    height: 50,
-    borderRadius: 20,
+  width: 50,
+  height: 50,
+  borderRadius: 20,
   },
   userInfo: {
-    marginBottom: 20,
+  marginBottom: 20,
   },
   userName: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  fontSize: 24,
+  fontFamily:'PoppinsBold',
   },
   userEmail: {
-    fontSize: 16,
-    color: '#6c757d',
+  fontSize: 16,
+  color: '#6c757d',
+  fontFamily:'PoppinsRegular'
   },
   searchContainer: {
-    marginBottom: 40,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  marginBottom: 40,
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
   },
   searchPic: {
-    width: 19,
-    height: 19,
+  width: 19,
+  height: 19,
   },
   searchBar: {
-    display: 'flex',
-    flexDirection: 'row',
-    backgroundColor: '#F2F2F3',
-    alignItems: 'center',
-    borderRadius: 10,
-    paddingLeft: 12,
-    paddingRight: 20,
-    gap: 3,
+  display: 'flex',
+  flexDirection: 'row',
+  backgroundColor: '#F2F2F3',
+  alignItems: 'center',
+  borderRadius: 10,
+  paddingLeft: 12,
+  paddingRight: 20,
+  gap: 3,
+  width: 250,
   },
   searchInput: {
-    backgroundColor: '#F2F2F3',
-    padding: 10,
-    borderRadius: 10,
-    color: '#A1A2A9',
-    fontSize: 16,
+  backgroundColor: '#F2F2F3',
+  padding: 10,
+  borderRadius: 10,
+  color: '#A1A2A9',
+  fontSize: 14,
+  fontFamily:'PoppinsRegular'
   },
   setPic: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#F2F2F3',
-    padding: 23,
-    borderRadius: 10,
+  width: 20,
+  height: 20,
+  backgroundColor: '#F2F2F3',
+  padding: 23,
+  borderRadius: 10,
   },
   sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 30,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: 30,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  fontSize: 18,
+  fontFamily:'PoppinsBold',
   },
   seeAll: {
-    color: '#A1A2A9',
+  color: '#A1A2A9',
+  fontFamily:'PoppinsRegular',
+    fontSize: 12,
   },
   featuredJobsContainer: {
-    paddingBottom: 20,
-    marginLeft: 10,
-    marginBottom: 10,
+  paddingBottom: 20,
+  marginLeft: 10,
+  marginBottom: 10,
   },
   featuredJob: {
-    display: 'flex',
-    gap: 50,
-    backgroundColor: '#007bff',
-    padding: 20,
-    borderRadius: 20,
-    alignItems: 'center',
-    marginRight: 10,
-    marginBottom: 15,
+  display: 'flex',
+  gap: 50,
+  backgroundColor: '#5386E4',
+  padding: 20,
+  borderRadius: 20,
+  alignItems: 'center',
+  marginRight: 10,
+  marginBottom: 15,
   },
   jobIconContainer: {
-    marginRight: 15,
-    display: 'flex',
-    flexDirection: 'row',
+  marginRight: 15,
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 5
   },
   jobIcon: {
-    width: 40,
-    height: 40,
+  width: 40,
+  height: 40,
+  margin: 10,
   },
   jobInner: {
-    display: 'flex',
-    gap: 6,
+  display: 'flex',
+  gap: 6,
   },
   jobInfo: {
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 40,
+  },
+  jobInfor: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 40,
+    gap: 30,
+    
   },
   jobTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
+  fontSize: 16,
+  fontFamily:'PoppinsBold',
+  color: '#fff',
   },
   jobCompany: {
-    fontSize: 14,
-    color: '#dfe6f3',
+  fontSize: 14,
+  color: '#dfe6f3',
+  fontFamily:'PoppinsRegular'
   },
   jobSalary: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
+  fontSize: 16,
+  fontFamily:'PoppinsBold',
+  color: '#fff',
   },
   jobLocation: {
-    fontSize: 14,
-    color: '#fff',
-    fontWeight: 'bold',
+  fontSize: 14,
+  color: '#fff',
+  fontFamily:'PoppinsBold',
   },
   popularJob: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 25,
+  flexDirection: 'row',
+  backgroundColor: '#fff',
+  padding: 20,
+  borderRadius: 15,
+  alignItems: 'center',
+  marginBottom: 25,
   },
   PopInfoRow:{
-    gap: 8,
+  gap: 8,
   },
   PopTitle:{
-    fontWeight: '800',
+    fontFamily:'PoppinsBold',
+    fontSize: 14,
   },
   PopCompany:{
-    color: '#A1A2A9',
+  color: '#A1A2A9',
+  fontFamily:'PoppinsRegular',
+    fontSize: 14,
   },
   PopSalary:{
-    fontWeight: '500',
+    fontFamily:'PoppinsBold',
+    fontSize: 12,
   },
   Poplocation:{
-    color: '#A1A2A9',
+  color: '#A1A2A9',
   },
-});
+  });
