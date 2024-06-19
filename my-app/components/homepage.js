@@ -8,7 +8,7 @@ const featuredJobs = [
     company: 'Facebook',
     salary: '$180,000',
     location: 'Accra, Ghana',
-    image: '../assets/facebook.png',
+    image: require('../assets/facebook.png'),
   },
   {
     id: '2',
@@ -16,7 +16,7 @@ const featuredJobs = [
     company: 'Google',
     salary: '$160,000',
     location: 'Mountain View, CA',
-    image: '../assets/google.png',
+    image: require('../assets/google.png'),
   },
 ];
 
@@ -52,43 +52,50 @@ export default function Homepage() {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <ScrollView contentContainerStyle={styles.scrollView}>
-
+      <View style={styles.padding}>
         <View style={styles.header}>
-          <View style={styles.userInfo}>
-            <Text style={styles.userName}>Eric Atsu</Text>
-            <Text style={styles.userEmail}>eric@gmail.com</Text>
-          </View>
-          <Image source={require('../assets/eric.png')} style={styles.profilePic} />
-        </View>
-
-        <View style={styles.searchContainer}>
-            <View style={styles.searchBarContainer}>
-            <TextInput
-                style={styles.searchInput}
-                placeholder="Search a job or position"
-            />
-            <Image source={require('../assets/search.png')} style={styles.searchPic} />
+            <View style={styles.userInfo}>
+              <Text style={styles.userName}>Eric Atsu</Text>
+              <Text style={styles.userEmail}>eric@gmail.com</Text>
             </View>
-            <Image source={require('../assets/set.png')} style={styles.searchPic} />
-        </View>
+            <Image source={require('../assets/eric.png')} style={styles.profilePic} />
+          </View>
 
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Featured Jobs</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAll}>See all</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.searchContainer}>
+              <View style={styles.searchBar}>
+              <Image source={require('../assets/search.png')} style={styles.searchPic} />
+              <TextInput
+                  style={styles.searchInput}
+                  placeholder="Search a job or position"
+              />
+              </View>
+              <Image source={require('../assets/set.png')} style={styles.setPic} />
+          </View>
+
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Featured Jobs</Text>
+            <TouchableOpacity>
+              <Text style={styles.seeAll}>See all</Text>
+            </TouchableOpacity>
+          </View>
+      </View>
+        
+
         <FlatList
           data={featuredJobs}
           horizontal
           renderItem={({ item }) => (
+
             <View style={styles.featuredJob}>
               <View style={styles.jobIconContainer}>
                 <Image source={{ uri: item.image }} style={styles.jobIcon} />
+                <View style={styles.jobInner}>
+                    <Text style={styles.jobTitle}>{item.title}</Text>
+                    <Text style={styles.jobCompany}>{item.company}</Text>
+                </View>
               </View>
+
               <View style={styles.jobInfo}>
-                <Text style={styles.jobTitle}>{item.title}</Text>
-                <Text style={styles.jobCompany}>{item.company}</Text>
                 <Text style={styles.jobSalary}>{item.salary}</Text>
                 <Text style={styles.jobLocation}>{item.location}</Text>
               </View>
@@ -98,6 +105,8 @@ export default function Homepage() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.featuredJobsContainer}
         />
+
+        <View style={styles.padding}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Popular Jobs</Text>
           <TouchableOpacity>
@@ -109,14 +118,22 @@ export default function Homepage() {
           <View key={job.id} style={styles.popularJob}>
             <Image source={{ uri: job.image }} style={styles.jobIcon} />
             <View style={styles.jobInfo}>
-              <Text style={styles.jobTitle}>{job.title}</Text>
-              <Text style={styles.jobCompany}>{job.company}</Text>
-              <Text style={styles.jobSalary}>{job.salary}</Text>
-              <Text style={styles.jobLocation}>{job.location}</Text>
+
+              <View style={styles.PopInfoRow}>
+              <Text style={styles.PopTitle}>{job.title}</Text>
+              <Text style={styles.PopCompany}>{job.company}</Text>
+              </View>
+
+              <View style={styles.PopInfoRow}>
+              <Text style={styles.PopSalary}>{job.salary}</Text>
+              <Text style={styles.Poplocation}>{job.location}</Text>
+              </View>
+
             </View>
           </View>
 
         ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -130,15 +147,19 @@ const styles = StyleSheet.create({
   scrollView: {
     padding: 20,
   },
+  padding: {
+  paddingHorizontal: 12,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+    marginTop: 30,
   },
   profilePic: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: 20,
   },
   userInfo: {
@@ -153,51 +174,85 @@ const styles = StyleSheet.create({
     color: '#6c757d',
   },
   searchContainer: {
-    marginBottom: 20,
+    marginBottom: 40,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  searchPic: {
+    width: 19,
+    height: 19,
+  },
+  searchBar: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#F2F2F3',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingLeft: 12,
+    paddingRight: 20,
+    gap: 3,
   },
   searchInput: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F2F2F3',
     padding: 10,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 1,
+    borderRadius: 10,
+    color: '#A1A2A9',
+    fontSize: 16,
+  },
+  setPic: {
+    width: 20,
+    height: 20,
+    backgroundColor: '#F2F2F3',
+    padding: 23,
+    borderRadius: 10,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 30,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
   },
   seeAll: {
-    color: '#007bff',
+    color: '#A1A2A9',
   },
   featuredJobsContainer: {
     paddingBottom: 20,
+    marginLeft: 10,
+    marginBottom: 10,
   },
   featuredJob: {
-    flexDirection: 'row',
+    display: 'flex',
+    gap: 50,
     backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 8,
+    padding: 20,
+    borderRadius: 20,
     alignItems: 'center',
     marginRight: 10,
+    marginBottom: 15,
   },
   jobIconContainer: {
     marginRight: 15,
+    display: 'flex',
+    flexDirection: 'row',
   },
   jobIcon: {
     width: 40,
     height: 40,
   },
+  jobInner: {
+    display: 'flex',
+    gap: 6,
+  },
   jobInfo: {
-    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 40,
   },
   jobTitle: {
     fontSize: 16,
@@ -215,7 +270,8 @@ const styles = StyleSheet.create({
   },
   jobLocation: {
     fontSize: 14,
-    color: '#dfe6f3',
+    color: '#fff',
+    fontWeight: 'bold',
   },
   popularJob: {
     flexDirection: 'row',
@@ -223,11 +279,21 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 1,
+    marginBottom: 25,
+  },
+  PopInfoRow:{
+    gap: 8,
+  },
+  PopTitle:{
+    fontWeight: '800',
+  },
+  PopCompany:{
+    color: '#A1A2A9',
+  },
+  PopSalary:{
+    fontWeight: '500',
+  },
+  Poplocation:{
+    color: '#A1A2A9',
   },
 });
